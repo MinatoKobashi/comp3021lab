@@ -1,2 +1,2 @@
-# comp3021lab
-The source code of all labs of comp3021 of HKUST
+Minato Kobashi
+20536627
