@@ -1,8 +1,10 @@
 package base;
 
+import java.util.Date;
+
 public class Note{
 	
-	public java.util.Date date;
+	public Date date;
 	public String title;
 	
 	public Note(String title) {
