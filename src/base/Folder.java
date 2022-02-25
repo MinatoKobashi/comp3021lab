@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Folder{
-	public ArrayList<Note> notes;
-	public String name;
+	private ArrayList<Note> notes;
+	private String name;
 	
 	public Folder(String name) {
 		this.notes = new ArrayList<Note>();

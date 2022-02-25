@@ -5,8 +5,8 @@ import java.util.Date;
 
 public class Note{
 	
-	public Date date;
-	public String title;
+	private Date date;
+	private String title;
 	
 	public Note(String title) {
 		this.title = title;

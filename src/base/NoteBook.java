@@ -3,7 +3,7 @@ package base;
 import java.util.ArrayList;
 
 public class NoteBook{
-	public ArrayList<Folder> folders;
+	private ArrayList<Folder> folders;
 	
 	public NoteBook() {
 		this.folders = new ArrayList<Folder>();
