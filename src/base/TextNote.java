@@ -6,6 +6,5 @@ public class TextNote extends Note {
 	
 	public TextNote(String title){
 		super(title);
-		this.content = title;
 	}
 }
