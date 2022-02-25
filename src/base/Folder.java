@@ -12,7 +12,8 @@ public class Folder{
 		this.name = name;
 	}
 	public void addNote(Note note) {
-		notes.add(note);
+		if (note != null)
+			notes.add(note);
 	}
 	public String getName(){
 		return this.name;

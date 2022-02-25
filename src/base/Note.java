@@ -15,7 +15,7 @@ public class Note{
 		return title;
 	}
 	public boolean equals(Note note) {
-		return this.title.equals(note.title);
+		return title.equals(note.title);
 	}
 	public int hashCode() {
 		return Objects.hash(title);
