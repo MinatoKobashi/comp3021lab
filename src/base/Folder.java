@@ -1,6 +1,7 @@
 package base;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Folder{
 	public java.util.ArrayList<Note> notes;
@@ -30,8 +31,19 @@ public class Folder{
 		}
 		return name + ":" + nText + ":" + nImage;
 	}
-	public boolean equals(Object name) {
-		return this.name.equals(name);
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Folder))
+			return false;
+		Folder other = (Folder) obj;
+		if (name == null && other.name == null)
+			return true;
+		if (name == null || other.name == null)
+			return false;
+		return Objects.equals(name, other.name);
 	}
 }
 
