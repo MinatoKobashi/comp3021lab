@@ -2,6 +2,6 @@ package comp3021;
 
 public class HelloWorld {
 	public static void main(String[] args) {
-		System.out.println(Object.equals("Hello World",null));
+		System.out.println("Hello World");
 	}
 }

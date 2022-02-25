@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Folder{
-	public java.util.ArrayList<Note> notes;
+	public ArrayList<Note> notes;
 	public String name;
 	
 	public Folder(String name) {
@@ -17,7 +17,7 @@ public class Folder{
 	public String getName(){
 		return this.name;
 	}
-	public java.util.ArrayList<Note> getNotes() {
+	public ArrayList<Note> getNotes() {
 		return this.notes;
 	}
 	public String toString() {
