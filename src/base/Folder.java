@@ -67,20 +67,16 @@ public class Folder implements Comparable<Folder>{
 			}
 			for(int k=0; k < keys.length ; k++) {
 				key = keys[k];
-				if (notes.get(i).search(key)) {
-					if (keys[k+1].toLowerCase() == "or") 
+				if (notes.get(i).nsearch(key) || tnote!=null && tnote.tsearch(key)) {
+					if (k+1<keys.length && keys[k+1].toLowerCase().equals("or")) 
 						k+=2;
 					continue;
 				}
-				else if(tnote!=null && tnote.search(key)) continue;
 				else if (k+1<keys.length && keys[k+1].toLowerCase().equals("or")) {
-					k+=2;
-					continue;
+					k++; continue;
 				}
-				else {
-					hit = false;
-					break;
-				}
+				hit = false;
+				break;
 			}
 			if (hit)
 				keyNotes.add(notes.get(i));

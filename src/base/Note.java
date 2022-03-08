@@ -42,7 +42,7 @@ public class Note implements Comparable<Note>{
 			return -1;
 		return 0;
 	}
-	public boolean search(String key) {
+	public boolean nsearch(String key) {
 		return title.toLowerCase().contains(key.toLowerCase());
 	}
 	public String toString() {

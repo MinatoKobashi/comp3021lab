@@ -10,7 +10,7 @@ public class TextNote extends Note {
 	public String getContent() {
 		return content;
 	}
-	public boolean search(String key) {
+	public boolean tsearch(String key) {
 		return content.toLowerCase().contains(key.toLowerCase());
 	}
 	public TextNote(String title, String content) {
