@@ -3,13 +3,14 @@ package base;
 import java.util.Objects;
 import java.util.Date;
 
-public class Note{
+public class Note implements Comparable<Note>{
 	
 	private Date date;
 	private String title;
 	
 	public Note(String title) {
 		this.title = title;
+		date = new Date();
 	}
 	public String getTitle() {
 		return title;
@@ -33,6 +34,19 @@ public class Note{
 		if (title == null || other.title == null)
 			return false;
 		return Objects.equals(title, other.title);
+	}
+	public int compareTo(Note o) {
+		if (date.after(o.date))
+			return 1;
+		if (date.before(o.date))
+			return -1;
+		return 0;
+	}
+	public boolean search(String key) {
+		return title.toLowerCase().contains(key.toLowerCase());
+	}
+	public String toString() {
+		return date.toString() + "\t" + title;
 	}
 }
 
