@@ -83,7 +83,6 @@ public class NoteBook implements java.io.Serializable{
 		return true;
 	}
 	public NoteBook(String file){
-		// TODO
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
