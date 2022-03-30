@@ -33,8 +33,7 @@ public class Account {
 
 	// TODO: Task3 
 	// replace the null with a lambda expression
-	public static AddMaker maker = null;
-
+	public static AddMaker maker = n -> {Consumer<Account> addN = a -> a.balance += n; return addN;};
 
 	// You can assume that all the Account in accounts have positive balances.
 	public static int getMaxAccountID(List<Account> accounts) {
