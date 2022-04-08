@@ -105,8 +105,38 @@ public class NoteBookWindow extends Application{
 		Button buttonSave = new Button("Save");
 		buttonSave.setPrefSize(100, 20);
 		buttonSave.setDisable(true);
+		Label label = new Label("Search");
+		TextField textSearch = new TextField();
+		textSearch.setText("");
+		Button buttonSearch = new Button("Search");
+		buttonSearch.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				currentSearch = textSearch.getText();
+				textAreaNote.setText("");
+				ArrayList<String> list = new ArrayList<String>();
+				ObservableList<String> combox2 = FXCollections.observableArrayList(list);
+				ArrayList<Folder> foldlers = noteBook.getFolders();
+				foldlers.forEach(f-> {if (f.getName().equals(currentFolder))
+						f.searchNotes(currentSearch).forEach(n->{if (n instanceof TextNote) combox2.add(n.getTitle());});});
+				titleslistView.setItems(combox2);
+			}
+		});
+		buttonSave.setPrefSize(100, 20);
+		buttonSave.setDisable(true);
+		Button buttonClear = new Button("Clear Search");
+		buttonClear.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				updateListView();
+				textAreaNote.setText("");
+				textSearch.setText("");
+			}
+		});
+		buttonSave.setPrefSize(100, 20);
+		buttonSave.setDisable(true);
 
-		hbox.getChildren().addAll(buttonLoad, buttonSave);
+		hbox.getChildren().addAll(buttonLoad, buttonSave, label, textSearch, buttonSearch, buttonClear);
 
 		return hbox;
 	}
@@ -123,7 +153,9 @@ public class NoteBookWindow extends Application{
 		vbox.setSpacing(8); // Gap between nodes
 
 		// TODO: This line is a fake folder list. We should display the folders in noteBook variable! Replace this with your implementation
-		foldersComboBox.getItems().addAll("FOLDER NAME 1", "FOLDER NAME 2", "FOLDER NAME 3");
+		ArrayList<String> s = new ArrayList<String>();
+		noteBook.getFolders().forEach((f) -> s.add(f.getName()));
+		foldersComboBox.getItems().addAll(s);
 
 		foldersComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Object>() {
 			@Override
@@ -132,7 +164,6 @@ public class NoteBookWindow extends Application{
 				// this contains the name of the folder selected
 				// TODO update listview
 				updateListView();
-
 			}
 
 		});
@@ -151,8 +182,14 @@ public class NoteBookWindow extends Application{
 				// TODO load the content of the selected note in
 				// textAreNote
 				String content = "";
+				List<Note> notes = noteBook.searchNotes(title);
+				for (Note n: notes) {
+					if (n.getTitle().equals(title) && n instanceof TextNote) {
+						TextNote tn = (TextNote) n;
+						content = tn.getContent();
+					}
+				}
 				textAreaNote.setText(content);
-
 			}
 		});
 		vbox.getChildren().add(new Label("Choose folder: "));
@@ -170,6 +207,9 @@ public class NoteBookWindow extends Application{
 		// currentFolder
 
 		ObservableList<String> combox2 = FXCollections.observableArrayList(list);
+		ArrayList<Folder> foldlers = noteBook.getFolders();
+		foldlers.forEach(f-> {if (f.getName().equals(currentFolder))
+				f.getNotes().forEach(n->{if (n instanceof TextNote) combox2.add(n.getTitle());});});
 		titleslistView.setItems(combox2);
 		textAreaNote.setText("");
 	}
@@ -212,7 +252,5 @@ public class NoteBookWindow extends Application{
 		nb.createTextNote("Holiday", "Los Angeles", "Peter said he wants to go next Agugust");
 		nb.createTextNote("Holiday", "Christmas", "Possible destinations : Home, New York or Rome");
 		noteBook = nb;
-
 	}
-
 }
