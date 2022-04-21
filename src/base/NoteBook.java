@@ -94,4 +94,8 @@ public class NoteBook implements java.io.Serializable{
 		} catch (Exception e) {
 		}
 	}
+	public void addFolder(String folderName) {
+		Folder folder = new Folder(folderName);
+		folders.add(folder);
+	}
 }
