@@ -215,9 +215,8 @@ public class NoteBookWindow extends Application{
 				// TODO update listview
 				updateListView();
 			}
-
 		});
-
+		
 		foldersComboBox.setValue("-----");
 
 		titleslistView.setPrefHeight(100);
@@ -343,7 +342,6 @@ public class NoteBookWindow extends Application{
 		foldersComboBox.getItems().clear();
 		foldersComboBox.getItems().addAll(s);
 		currentFolder = "";
-		currentNote = "";
 		updateListView();
 	}
 
@@ -463,7 +461,7 @@ public class NoteBookWindow extends Application{
 	}
 	
 	private void loadNoteBook(File file) {
-		NoteBook nb = new NoteBook(file.getAbsolutePath());
+		NoteBook nb = new NoteBook(file.getName());
 		noteBook = nb;
 	}
 }
