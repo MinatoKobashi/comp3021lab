@@ -176,11 +176,7 @@ public class NoteBookWindow extends Application{
 						Alert alert = new Alert(AlertType.INFORMATION); 
 						alert.setTitle("Successfully saved"); 
 						alert.setContentText("Your file has been saved to file " + file.getName()); 
-						alert.showAndWait().ifPresent(rs -> {
-							if (rs == ButtonType.OK) {
-								System.out.println("Pressed OK.");
-							} 
-						});
+						alert.showAndWait();
 					}
 				}
 			}
@@ -217,7 +213,7 @@ public class NoteBookWindow extends Application{
 			}
 		});
 		
-		foldersComboBox.setValue("-----");
+		foldersComboBox.setValue("");
 
 		titleslistView.setPrefHeight(100);
 
@@ -259,6 +255,7 @@ public class NoteBookWindow extends Application{
 						alert.setTitle("Warning"); 
 						alert.setHeaderText("Warning"); 
 						alert.setContentText("Please input a valid folder name");
+						alert.showAndWait();
 					}
 					else {
 						Folder folder = new Folder(result.get());
@@ -267,6 +264,7 @@ public class NoteBookWindow extends Application{
 							alert.setTitle("Warning"); 
 							alert.setHeaderText("Warning"); 
 							alert.setContentText("You already have a folder named "+folder.getName());
+							alert.showAndWait();
 						}
 						else {
 							noteBook.getFolders().add(folder);
@@ -287,6 +285,7 @@ public class NoteBookWindow extends Application{
 					alert.setTitle("Warning"); 
 					alert.setHeaderText("Warning"); 
 					alert.setContentText("Please choose a folder first!");
+					alert.showAndWait();
 				}
 				else {
 					TextInputDialog dialog = new TextInputDialog("Add a Note"); 
@@ -295,13 +294,28 @@ public class NoteBookWindow extends Application{
 					dialog.setContentText("Please enter the name of your note:");
 					Optional<String> inputNoteName = dialog.showAndWait(); 
 					if (inputNoteName.isPresent()) {
-						if (inputNoteName.get()=="" && noteBook.createTextNote(currentFolder, inputNoteName.get())) {
+						if (inputNoteName.get()!="" && noteBook.createTextNote(currentFolder, inputNoteName.get())) {
 							Alert alert = new Alert(AlertType.INFORMATION); 
 							alert.setTitle("Successful!"); 
 							alert.setHeaderText("Message"); 
 							alert.setContentText("Insert note "+inputNoteName.get()+" to folder "+currentFolder+" successfully!");
+							alert.showAndWait();
 							updateListView();
 						}
+						else {
+							Alert alert = new Alert(AlertType.WARNING); 
+							alert.setTitle("Warning!"); 
+							alert.setHeaderText("Warning"); 
+							alert.setContentText("Cannot insert note "+inputNoteName.get()+" to folder "+currentFolder);
+							alert.showAndWait();
+						}
+					}
+					else {
+						Alert alert = new Alert(AlertType.WARNING); 
+						alert.setTitle("Warning!"); 
+						alert.setHeaderText("Warning"); 
+						alert.setContentText("Please input name of note");
+						alert.showAndWait();
 					}
 				}
 			}
@@ -338,7 +352,7 @@ public class NoteBookWindow extends Application{
 	private void updateGUI() {
 		ArrayList<String> s = new ArrayList<String>();
 		noteBook.getFolders().forEach((f) -> s.add(f.getName()));
-		foldersComboBox.setValue("-----");
+		foldersComboBox.setValue("");
 		foldersComboBox.getItems().clear();
 		foldersComboBox.getItems().addAll(s);
 		currentFolder = "";
@@ -381,6 +395,7 @@ public class NoteBookWindow extends Application{
 					alert.setTitle("Warning"); 
 					alert.setHeaderText("Warning"); 
 					alert.setContentText("Please select a folder and a note!");
+					alert.showAndWait();
 				}
 				else {
 					Folder folder = null;
@@ -407,6 +422,7 @@ public class NoteBookWindow extends Application{
 					alert.setTitle("Warning"); 
 					alert.setHeaderText("Warning"); 
 					alert.setContentText("Please select a folder and a note!");
+					alert.showAndWait();
 				}
 				else {
 					Folder folder = null;
@@ -424,6 +440,7 @@ public class NoteBookWindow extends Application{
 						alert.setTitle("Succeed!"); 
 						alert.setHeaderText("Confirmation"); 
 						alert.setContentText("Your note has been succcessfully removed");
+						alert.showAndWait();
 					}
 				}
 			}
